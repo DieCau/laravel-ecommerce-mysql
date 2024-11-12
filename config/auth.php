@@ -36,9 +36,15 @@ return [
     */
 
     'guards' => [
+        // Users comunes
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        // Solo administradores
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -60,9 +66,15 @@ return [
     */
 
     'providers' => [
+        // Users comunes
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        // Solo para administradores
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
@@ -91,9 +103,17 @@ return [
     */
 
     'passwords' => [
+        // Users comunes
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        // Para administradores
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
@@ -104,9 +124,9 @@ return [
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
     |
-    | Here you may define the amount of seconds before a password confirmation
-    | window expires and users are asked to re-enter their password via the
-    | confirmation screen. By default, the timeout lasts for three hours.
+    | Aquí puede definir la cantidad de segundos que deben transcurrir antes de que caduque el token
+    | y se solicite a los usuarios que vuelvan a ingresar su contraseña a través de la pantalla de confirmación.
+    | De manera predeterminada, el tiempo de espera dura 3 horas.
     |
     */
 
