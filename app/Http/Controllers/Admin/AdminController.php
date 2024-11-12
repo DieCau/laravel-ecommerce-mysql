@@ -34,7 +34,7 @@ class AdminController extends Controller
                 return redirect()->route('admin.index');
             }else {
                 return redirect()->route('admin.login')->with([
-                    'error' => 'Email y Password no coinciden'
+                    'error' => 'El E-mail y el Password no coinciden...'
                 ]);
             }
         }

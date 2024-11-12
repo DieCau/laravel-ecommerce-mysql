@@ -18,6 +18,7 @@ class AdminFactory extends Factory
      */
     public function definition(): array
     {
+        // Generar datos fakes para el modelo Admin
         return [
             'name' => 'admin',
             'email'=> 'admin@gmail.com',
