@@ -75,6 +75,7 @@ class ColorController extends Controller
     {
         $color->delete();
         return redirect()->route('admin.colors.index')->with([
+            // configurar el mensaje 
             'success' => 'El color se ha eliminado correctamente'
         ]);
     }
