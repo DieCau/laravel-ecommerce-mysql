@@ -9,6 +9,9 @@ Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 
 
 Route::middleware('admin')->group(function() {
-    // Ruta protegida por middleware
+    // Ruta del dashboard protegida por middleware
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    
+    // Ruta de logout protegida por middleware
+    Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
