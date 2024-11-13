@@ -14,6 +14,12 @@
                         Dashboard
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center gap-2" aria-current="page" href="{{ route('admin.colors.index') }}">
+                        <i class="fas fa-palette"></i>
+                        Colores
+                    </a>
+                </li>
             </ul>
             <hr class="my-3">
             <ul class="nav flex-column mb-auto">

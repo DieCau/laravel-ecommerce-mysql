@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ColorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class, 'login'])->name('admin.login');
@@ -14,4 +15,18 @@ Route::middleware('admin')->group(function() {
     
     // Ruta de logout protegida por middleware
     Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    // Rutas Colors
+    Route::resource('colors', ColorController::class, 
+    // Personalizar el nombre de las rutas
+    [
+        'names' => [
+            'index' => 'admin.colors.index',
+            'create' => 'admin.colors.create',
+            'store' => 'admin.colors.store',
+            'edit' => 'admin.colors.edit',
+            'update' => 'admin.colors.update',
+            'destroy' => 'admin.colors.destroy',
+        ]
+    ]);
 });
