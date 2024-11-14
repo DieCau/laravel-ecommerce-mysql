@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AddColorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    // Determinar si el usuario está autorizado para realizar esta solicitud. Cambiar false x "true"   
     public function authorize(): bool
     {
         return true;

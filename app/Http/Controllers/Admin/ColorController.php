@@ -27,15 +27,17 @@ class ColorController extends Controller
         return view('admin.colors.create');
     }
 
-    // Guardar un recurso recién creado en la DB
+    // Guardar un color recien creado en la DB
     // Pasar la instancia de la clase AddColorRequest que se creo
     public function store(AddColorRequest $request)
     {
         // Validar si el color a crear cumple con las reglas
         if($request -> validated()) 
         {
+            // El nombre del color es ingresado en la DB
+            Color::create($request->validated());
             
-            // Redirigir al user a la view colors.index 
+            // Una vez guardado, redirigir al user a la view colors.index 
             return redirect()->route('admin.colors.index')->with([
                 // Mensaje
                 'success' => 'El color se ha registrado correctamente!'

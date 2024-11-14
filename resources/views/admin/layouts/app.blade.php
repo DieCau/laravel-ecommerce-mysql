@@ -47,13 +47,14 @@
         });
         function deleteItem(id) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: '¿Seguro que quieres eliminar?',
+                text: "Esta acción no se puede deshacer!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'No, cancelar'
                 }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(id).submit();
