@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="p-4">Tamaños</h3>
-                    <a href="{{ route('admin.size.create')}}" class="btn btn-sm btn-primary">Agregar Tamaño
+                    <a href="{{ route('admin.sizes.create')}}" class="btn btn-sm btn-primary">Crear Tamaño
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -33,20 +33,20 @@
                     </thead>
                     <tbody class="table-group-divider">
                         {{-- Usar bucle "foreach" para recorrer cada registro e imprimir en cada fila  --}}
-                        @foreach ($colors as $key => $color)
+                        @foreach ($sizes as $key => $size)
                             {{-- Fila --}}
                             <tr>
                                 <th scope="row">{{ $key += 1 }}</th>
-                                <td>{{ $color->name }}</td>
+                                <td>{{ $size->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.colors.edit', $color->id) }}" class="btn btn-sm btn-warning">Editar 
+                                    <a href="{{ route('admin.sizes.edit', $size->id) }}" class="btn btn-sm btn-warning">Editar 
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                    <a href="#" onclick="deleteItem({{ $color->id }})" class="btn btn-sm btn-danger">Eliminar
+                                    <a href="#" onclick="deleteItem({{ $size->id }})" class="btn btn-sm btn-danger">Eliminar
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <form id="{{ $color->id }}" action="{{ route('admin.colors.destroy', $color->id) }} " 
+                                    <form id="{{ $size->id }}" action="{{ route('admin.sizes.destroy', $size->id) }} " 
                                         method="POST">
                                         @csrf
                                         {{-- Aqui metodo DELETE  --}}

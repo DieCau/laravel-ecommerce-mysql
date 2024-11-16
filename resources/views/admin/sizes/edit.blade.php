@@ -7,21 +7,21 @@
         @include('admin.layouts.sidebar')
         <div class="col-md-9 mx-auto">
             <div class="row">
-                <h3 class="p-4">Editar Color</h3>
+                <h3 class="p-4">Editar Tamaño</h3>
                 <hr>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <form action="{{ route('admin.colors.update', $color->id) }}" method="POST">
+                        <form action="{{ route('admin.sizes.update', $size->id) }}" method="POST">
                             @csrf
                             
                             @method('PUT')
                             <div class="form-floating mb-3">
                                 <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Color..." value="{{ $color->name, old('name') }}">
-                                <label for="floatingInput">Color</label>
+                                    placeholder="Tamaño..." value="{{ $size->name, old('name') }}">
+                                <label for="floatingInput">Tamaño</label>
 
                                 {{-- Aqui mensaje de error para Email --}}
                                 @error('name')

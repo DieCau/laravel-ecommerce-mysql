@@ -20,6 +20,12 @@
                         Colores
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center gap-2" aria-current="page" href="{{ route('admin.sizes.index') }}">
+                        <i class="fas fa-expand"></i>
+                        Tamaños
+                    </a>
+                </li>
             </ul>
             <hr class="my-3">
             <ul class="nav flex-column mb-auto">
