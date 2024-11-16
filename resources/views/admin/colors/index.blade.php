@@ -49,7 +49,7 @@
                                     <form id="{{ $color->id }}" action="{{ route('admin.colors.destroy', $color->id) }} " 
                                         method="POST">
                                         @csrf
-                                        Metodo 
+                                        {{-- Aqui metodo DELETE  --}}
                                         @method('DELETE')
                                     </form>
                                 </td>
