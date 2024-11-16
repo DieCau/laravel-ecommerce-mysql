@@ -8,8 +8,8 @@
         <div class="col-md-9 mx-auto">
             <div class="row">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="p-4">Colores</h3>
-                    <a href="{{ route('admin.colors.create')}}" class="btn btn-sm btn-primary">Agregar Color
+                    <h3 class="p-4">Tamaños</h3>
+                    <a href="{{ route('admin.size.create')}}" class="btn btn-sm btn-primary">Agregar Tamaño
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>

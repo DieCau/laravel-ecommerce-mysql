@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\SizeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class, 'login'])->name('admin.login');
@@ -19,7 +20,7 @@ Route::middleware('admin')->group(function() {
         // Ruta de logout protegida por middleware
         Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
     
-        // Rutas Colors
+        // Rutas "Colors"
         Route::resource('colors', ColorController::class, 
         // Personalizar el nombre de las rutas
         [
@@ -30,6 +31,20 @@ Route::middleware('admin')->group(function() {
                 'edit' => 'admin.colors.edit',
                 'update' => 'admin.colors.update',
                 'destroy' => 'admin.colors.destroy',
+            ]
+        ]);
+        
+        // Rutas "Sizes"
+        Route::resource('sizes', SizeController::class, 
+        // Personalizar el nombre de las rutas
+        [
+            'names' => [
+                'index' => 'admin.sizes.index',
+                'create' => 'admin.sizes.create',
+                'store' => 'admin.sizes.store',
+                'edit' => 'admin.sizes.edit',
+                'update' => 'admin.sizes.update',
+                'destroy' => 'admin.sizes.destroy',
             ]
         ]);
     });
