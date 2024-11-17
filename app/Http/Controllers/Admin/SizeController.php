@@ -63,8 +63,8 @@ class SizeController extends Controller
     // Pasar la instancia de la clase "UpdatesizeRequest"   
     public function update(UpdateSizeRequest $request, Size $size)
     {
-        if($request->validated){
-            $size ->update($request->validated());
+        if($request->validated()){
+            $size->update($request->validated());
             return redirect()->route('admin.sizes.index')->with([
                 'success' => 'El Tamaño se ha actualizado correctamente'
             ]);

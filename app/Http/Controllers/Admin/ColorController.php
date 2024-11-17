@@ -64,8 +64,8 @@ class ColorController extends Controller
     // Pasar la instancia de la clase "UpdateColorRequest"   
     public function update(UpdateColorRequest $request, Color $color)
     {
-        if($request->validated){
-            $color ->update($request->validated());
+        if($request->validated()){
+            $color->update($request->validated());
             return redirect()->route('admin.colors.index')->with([
                 'success' => 'El color se ha actualizado correctamente'
             ]);
