@@ -23,14 +23,6 @@
                                     placeholder="Color..." value="{{ $color->name, old('name') }}">
                                 <label for="floatingInput">Color</label>
 
-                                {{-- Aqui mensaje de error para Email --}}
-                                @error('name')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
                                     Guardar Cambios

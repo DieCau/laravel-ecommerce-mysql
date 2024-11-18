@@ -9,15 +9,19 @@
             <div class="row">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="p-4">Colores</h3>
-                    <a href="{{ route('admin.colors.create')}}" class="btn btn-sm btn-primary">Crear Color
+                    <a href="{{ route('admin.colors.create') }}" class="btn btn-sm btn-primary">Crear Color
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
+                {{-- Muestra los diferentes mensajes --}}
                 @session('success')
-                    <div class="alert alert-success my-2">
+                    <div id="successMessage" class="alert alert-success my-2">
                         {{ session('success') }}
-                    </div>                    
+                    </div>
                 @endsession
+
+                <script src="{{ asset('js/message.js') }}"></script>
+
                 <hr>
             </div>
             <div class="card-body">
@@ -39,14 +43,16 @@
                                 <th scope="row">{{ $key += 1 }}</th>
                                 <td>{{ $color->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.colors.edit', $color->id) }}" class="btn btn-sm btn-warning">Editar 
+                                    <a href="{{ route('admin.colors.edit', $color->id) }}"
+                                        class="btn btn-sm btn-warning">Editar
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    
-                                    <a href="#" onclick="deleteItem({{ $color->id }})" class="btn btn-sm btn-danger">Eliminar
+
+                                    <a href="#" onclick="deleteItem({{ $color->id }})"
+                                        class="btn btn-sm btn-danger">Eliminar
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <form id="{{ $color->id }}" action="{{ route('admin.colors.destroy', $color->id) }} " 
+                                    <form id="{{ $color->id }}" action="{{ route('admin.colors.destroy', $color->id) }} "
                                         method="POST">
                                         @csrf
                                         {{-- Aqui metodo DELETE  --}}
@@ -55,7 +61,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    
+
                     </tbody>
                 </table>
 

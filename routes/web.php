@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SizeController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,20 @@ Route::middleware('admin')->group(function() {
                 'edit' => 'admin.sizes.edit',
                 'update' => 'admin.sizes.update',
                 'destroy' => 'admin.sizes.destroy',
+            ]
+        ]);
+        
+        // Rutas "Coupon"
+        Route::resource('coupons', CouponController::class, 
+        // Personalizar el nombre de las rutas
+        [
+            'names' => [
+                'index' => 'admin.coupons.index',
+                'create' => 'admin.coupons.create',
+                'store' => 'admin.coupons.store',
+                'edit' => 'admin.coupons.edit',
+                'update' => 'admin.coupons.update',
+                'destroy' => 'admin.coupons.destroy',
             ]
         ]);
     });

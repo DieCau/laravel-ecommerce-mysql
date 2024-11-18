@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddColorRequest;
 use App\Http\Requests\UpdateColorRequest;
 use App\Models\Color;
-use Illuminate\Http\Request;
 
 // Aqui se realiza el CRUD para Colors
 class ColorController extends Controller

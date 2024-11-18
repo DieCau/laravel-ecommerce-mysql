@@ -7,20 +7,19 @@
         @include('admin.layouts.sidebar')
         <div class="col-md-9 mx-auto">
             <div class="row">
-                <h3 class="p-4">Editar Tamaño</h3>
+                <h3 class="p-4">Nuevo Tamaño</h3>
                 <hr>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <form action="{{ route('admin.sizes.update', $size->id) }}" method="POST">
+                        <form action="{{ route('admin.sizes.store') }}" method="POST">
                             @csrf
-                            
-                            @method('PUT')
+
                             <div class="form-floating mb-3">
-                                <input type="text" name='name'
+                                <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Tamaño..." value="{{ $size->name, old('name') }}">
+                                    placeholder="Tamaño...">
                                 <label for="floatingInput">Tamaño</label>
 
                                 {{-- Aqui mensaje de error para Email --}}
@@ -33,7 +32,7 @@
 
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
-                                    Guardar Cambios
+                                    Crear Tamaño
                                 </button>
                             </div>
 

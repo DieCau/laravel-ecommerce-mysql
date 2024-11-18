@@ -23,7 +23,7 @@ class UpdateColorRequest extends FormRequest
     public function rules(): array
     {
         return [                                            // Parametro que nos ayuda a editar un color
-            'name' => 'required|max:255|unique:colors, name,'.$this->color->id,
+            'name' => 'required|max:255|unique:colors,name,'.$this->color->id,
         ];
     }
 

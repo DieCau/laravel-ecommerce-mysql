@@ -21,8 +21,8 @@ class UpdateSizeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [                                            // Parametro que nos ayuda a editar un color
-            'name' => 'required|max:255|unique:sizes, name,'.$this->size->id,
+        return [                                            // Parametro que nos ayuda a editar un tamaño
+            'name' => 'required|max:255|unique:sizes,name,'.$this->size->id,
         ];
     }
 
