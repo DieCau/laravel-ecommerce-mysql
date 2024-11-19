@@ -49,7 +49,7 @@ Route::middleware('admin')->group(function() {
             ]
         ]);
         
-        // Rutas "Coupon"
+        // Rutas "Coupons"
         Route::resource('coupons', CouponController::class, 
         // Personalizar el nombre de las rutas
         [

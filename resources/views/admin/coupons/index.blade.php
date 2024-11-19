@@ -8,8 +8,8 @@
         <div class="col-md-9 mx-auto">
             <div class="row">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="py-4">Tamaños</h3>
-                    <a href="{{ route('admin.sizes.create')}}" class="btn btn-sm btn-primary">Crear Tamaño
+                    <h3 class="py-4">Cupones</h3>
+                    <a href="{{ route('admin.coupons.create')}}" class="btn btn-sm btn-primary">Crear Cupon
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -32,25 +32,29 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Validez</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         {{-- Usar bucle "foreach" para recorrer cada registro e imprimir en cada fila  --}}
-                        @foreach ($sizes as $key => $size)
+                        @foreach ($coupons as $key => $coupon)
                             {{-- Fila --}}
                             <tr>
                                 <th scope="row">{{ $key += 1 }}</th>
-                                <td>{{ $size->name }}</td>
+                                <td>{{ $coupon->name }}</td>
+                                <td>{{ $coupon->discount }}</td>
+                                <td>{{ $coupon->valid_until }}</td>
                                 <td>
-                                    <a href="{{ route('admin.sizes.edit', $size->id) }}" class="btn btn-sm btn-warning">Editar 
+                                    <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-sm btn-warning">Editar 
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                    <a href="#" onclick="deleteItem({{ $size->id }})" class="btn btn-sm btn-danger">Eliminar
+                                    <a href="#" onclick="deleteItem({{ $coupon->id }})" class="btn btn-sm btn-danger">Eliminar
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <form id="{{ $size->id }}" action="{{ route('admin.sizes.destroy', $size->id) }} " 
+                                    <form id="{{ $coupon->id }}" action="{{ route('admin.coupons.destroy', $coupon->id) }} " 
                                         method="POST">
                                         @csrf
                                         {{-- Aqui metodo DELETE  --}}
