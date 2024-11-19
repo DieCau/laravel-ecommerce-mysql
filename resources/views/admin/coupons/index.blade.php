@@ -55,7 +55,7 @@
                                     @else                                        
                                         <span class="bg-danger p-1 text-white">
                                             {{-- mensaje de que el cupon esta caducado --}}
-                                            Caducado!
+                                            Caducado
                                         </span>                                        
                                     @endif
                                 </td>
