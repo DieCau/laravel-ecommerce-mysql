@@ -45,7 +45,20 @@
                                 <th scope="row">{{ $key += 1 }}</th>
                                 <td>{{ $coupon->name }}</td>
                                 <td>{{ $coupon->discount }}</td>
-                                <td>{{ $coupon->valid_until }}</td>
+                                <td>
+                                    {{-- Saber si el cupon es valido o no con metodo checkIfValid --}}
+                                    @if ($coupon->checkIfValid())
+                                        <span class="bg-success p-1 text-white">
+                                            {{-- mensaje de cuándo caduca con formato entendible para humanos --}}
+                                            Caduca {{ \Carbon\carbon::parse($coupon->valid_until)->diffForHumans() }}
+                                        </span>
+                                    @else                                        
+                                        <span class="bg-danger p-1 text-white">
+                                            {{-- mensaje de que el cupon esta caducado --}}
+                                            Caducado!
+                                        </span>                                        
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-sm btn-warning">Editar 
                                         <i class="fas fa-edit"></i>

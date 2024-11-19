@@ -16,6 +16,7 @@ class Coupon extends Model
         $this->attributes['name'] = Str::upper($value);
     }
 
+    // Metodo para checkear si un cupon es valido o no
     public function checkIfValid() 
     {
         if($this->valid_until > Carbon::now()) {

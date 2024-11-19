@@ -23,7 +23,7 @@ class AddCouponRequest extends FormRequest
     {
         // Agregar las reglas para el/los atributo/s
         return [
-                    // Requerido|max_caracteres=255|color unico  
+                    // Requerido|max_caracteres=255|cupon unico  
             'name' => 'required|max:255|unique:coupons',
             'discount' => 'required',
             'valid_until' => 'required',

@@ -22,7 +22,7 @@
                                     placeholder="Color...">
                                 <label for="floatingInput">Color</label>
 
-                                {{-- Aqui mensaje de error para Email --}}
+                                {{-- Aqui mensaje de error para color --}}
                                 @error('name')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
