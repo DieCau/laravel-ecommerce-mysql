@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::middleware('admin')->group(function() {
         // Ruta de logout protegida por middleware
         Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
     
-        // Rutas "Colors"
+        // Rutas "Colores"
         Route::resource('colors', ColorController::class, 
         // Personalizar el nombre de las rutas
         [
@@ -35,7 +36,7 @@ Route::middleware('admin')->group(function() {
             ]
         ]);
         
-        // Rutas "Sizes"
+        // Rutas "Tamaños"
         Route::resource('sizes', SizeController::class, 
         // Personalizar el nombre de las rutas
         [
@@ -49,7 +50,7 @@ Route::middleware('admin')->group(function() {
             ]
         ]);
         
-        // Rutas "Coupons"
+        // Rutas "Cupones"
         Route::resource('coupons', CouponController::class, 
         // Personalizar el nombre de las rutas
         [
@@ -60,6 +61,20 @@ Route::middleware('admin')->group(function() {
                 'edit' => 'admin.coupons.edit',
                 'update' => 'admin.coupons.update',
                 'destroy' => 'admin.coupons.destroy',
+            ]
+        ]);
+       
+        // Rutas "Productos"
+        Route::resource('products', ProductController::class, 
+        // Personalizar el nombre de las rutas
+        [
+            'names' => [
+                'index' => 'admin.products.index',
+                'create' => 'admin.products.create',
+                'store' => 'admin.products.store',
+                'edit' => 'admin.products.edit',
+                'update' => 'admin.products.update',
+                'destroy' => 'admin.products.destroy',
             ]
         ]);
     });
