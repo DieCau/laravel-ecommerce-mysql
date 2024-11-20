@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -161,7 +162,15 @@ class ProductController extends Controller
     // Eliminar el recurso especificado de la DB
     public function destroy(Product $product)
     {
+        // Antes de eliminar el producto debo eliminar las imagenes
+        $this->removeProductImageFromStorage($product->thumbnail);
+        $this->removeProductImageFromStorage($product->first_image);
+        $this->removeProductImageFromStorage($product->second_image);
+        $this->removeProductImageFromStorage($product->third_image);
+
+        // Ahroa si eliminar el producto 
         $product->delete();
+
         return redirect()->route('admin.products.index')->with([
             // configurar el mensaje 
             'success' => 'El Producto se ha eliminado correctamente'
@@ -174,5 +183,17 @@ class ProductController extends Controller
         $image_name = time().'_'.$file->getClientOriginalName();
         $file->storeAs('images/products', $image_name, 'public');
         return 'storage/images/products/'.$image_name;
+    }
+
+    // Crear el metodo removeProductImageFromStorage()
+    public function removeProductImageFromStorage($file) 
+    {
+        // obtener la ruta completa del archivo que se quiere eliminar
+        $path = public_path('storage/images/products'.$file);
+        // Verificar si el archivo existe 
+        if(File::exists($path)) {
+            // Si existe se elimina el archivo
+            File::delete($path);
+        }
     }
 }

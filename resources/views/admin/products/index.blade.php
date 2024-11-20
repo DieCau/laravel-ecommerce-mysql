@@ -8,8 +8,8 @@
         <div class="col-md-9 mx-auto">
             <div class="row">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="py-4">Cupones</h3>
-                    <a href="{{ route('admin.coupons.create')}}" class="btn btn-sm btn-primary">Crear Cupon
+                    <h3 class="py-4">Productos</h3>
+                    <a href="{{ route('admin.products.create')}}" class="btn btn-sm btn-primary">Crear Producto
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -32,42 +32,73 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Descuento</th>
-                            <th scope="col">Validez</th>
+                            <th scope="col">Colores</th>
+                            <th scope="col">Tamaños</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Imagenes</th>
+                            <th scope="col">Estado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         {{-- Usar bucle "foreach" para recorrer cada registro e imprimir en cada fila  --}}
-                        @foreach ($coupons as $key => $coupon)
+                        @foreach ($products as $key => $product)
                             {{-- Fila --}}
                             <tr>
                                 <th scope="row">{{ $key += 1 }}</th>
-                                <td>{{ $coupon->name }}</td>
-                                <td>{{ $coupon->discount }}</td>
+                                <td>{{ $product->name }}</td>
                                 <td>
-                                    {{-- Saber si el cupon es valido o no con metodo checkIfValid --}}
-                                    @if ($coupon->checkIfValid())
-                                        <span class="bg-success p-1 text-white">
-                                            {{-- mensaje de cuándo caduca con formato entendible para humanos --}}
-                                            Caduca {{ \Carbon\carbon::parse($coupon->valid_until)->diffForHumans() }}
-                                        </span>
-                                    @else                                        
-                                        <span class="bg-danger p-1 text-white">
-                                            {{-- mensaje de que el cupon esta caducado --}}
-                                            Caducado
+                                    @foreach ($products->colors as $color)
+                                        <span class="badge bg-ligth text-dark">
+                                            {{ $color->name }}
                                         </span>                                        
-                                    @endif
+                                    @endforeach                                    
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-sm btn-warning">Editar 
+                                    @foreach ($products->sizes as $size)
+                                        <span class="badge bg-ligth text-dark">
+                                            {{ $size->name }}
+                                        </span>                                        
+                                    @endforeach                                    
+                                </td>
+                                <td>{{ $product->quantity }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->name }}" 
+                                            class="img-fluid rounded mb-1 border border-muted" width="30" height="30">
+                                        <img src="{{ asset($product->first_image) }}" alt="{{ $product->name }}" 
+                                            class="img-fluid rounded mb-1" width="30" height="30">
+                                        <img src="{{ asset($product->second_image) }}" alt="{{ $product->name }}" 
+                                            class="img-fluid rounded mb-1" width="30" height="30">
+                                        <img src="{{ asset($product->third_image) }}" alt="{{ $product->name }}" 
+                                            class="img-fluid rounded mb-1" width="30" height="30">
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {{-- verificar si tiene stock el producto --}}
+                                    @if ($product->status)
+                                        <span class="bagde bg-success p-2">
+                                            En stock
+                                        </span> 
+                                    @else
+                                        <span class="bagde bg-danger p-2">
+                                            Sin stock
+                                        </span> 
+                                    @endif
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('admin.products.edit', $product->slug) }}" class="btn btn-sm btn-warning">Editar 
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                    <a href="#" onclick="deleteItem({{ $coupon->id }})" class="btn btn-sm btn-danger">Eliminar
+                                    <a href="#" onclick="deleteItem({{ $product->id }})" class="btn btn-sm btn-danger">Eliminar
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <form id="{{ $coupon->id }}" action="{{ route('admin.coupons.destroy', $coupon->id) }} " 
+                                    <form id="{{ $product->id }}" action="{{ route('admin.products.destroy', $product->slug) }} " 
                                         method="POST">
                                         @csrf
                                         {{-- Aqui metodo DELETE  --}}

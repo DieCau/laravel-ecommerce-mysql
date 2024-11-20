@@ -7,32 +7,33 @@
         @include('admin.layouts.sidebar')
         <div class="col-md-9 mx-auto">
             <div class="row">
-                <h3 class="p-4">Nuevo Cupon</h3>
+                <h3 class="p-4">Nuevo Producto</h3>
                 <hr>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <form action="{{ route('admin.coupons.store') }}" method="POST">
+                        {{-- Al trabajar con imagenes necesitamos enctype --}}
+                        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             
-                            {{-- Nombre del cupon --}}
+                            {{-- Nombre del producto --}}
                             <div class="form-floating mb-3">
                                 <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Cupon..." value="{{ old('name') }}"> 
-                                <label for="floatingInput">Cupon</label>
+                                    placeholder="Producto..." value="{{ old('name') }}"> 
+                                <label for="floatingInput">Producto</label>
                            
-                            {{-- Descuento del cupon --}}
+                            {{-- Cantidad del producto --}}
                             <div class="form-floating mb-3">
-                                <input type="number" name="discount"
-                                    class="form-control @error('discount') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Descuento"  value="{{ old('discount') }}">                                   
+                                <input type="number" name="quantity"
+                                    class="form-control @error('quantity') is-invalid @enderror" id="floatingInput"
+                                    placeholder="Cantidad"  value="{{ old('quantity') }}">                                   
                                     
-                                <label for="floatingInput">Descuento</label>
+                                <label for="floatingInput">Cantidad</label>
 
-                                {{-- Aqui mensaje de error para Descuento --}}
-                                @error('discount')
+                                {{-- Aqui mensaje de error para Cantidad --}}
+                                @error('quantity')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -61,7 +62,7 @@
 
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
-                                    Crear Cupon
+                                    Crear Producto
                                 </button>
                             </div>
 
