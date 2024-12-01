@@ -23,6 +23,12 @@
                                     class="form-control @error('name') is-invalid @enderror" id="floatingInput"
                                     placeholder="Producto..." value="{{ old('name') }}"> 
                                 <label for="floatingInput">Producto</label>
+
+                                @error('name')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>                                    
+                                @enderror
                            
                             {{-- Cantidad del producto --}}
                             <div class="form-floating mb-3">
