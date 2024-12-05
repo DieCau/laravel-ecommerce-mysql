@@ -45,21 +45,77 @@
                                     </span>
                                 @enderror
                             </div>
-                            
-                            {{-- Fecha de validez --}}
+                           
+                            {{-- Precio del producto --}}
                             <div class="form-floating mb-3">
-                                <input type="datetime-local" name="valid_until"
-                                    class="form-control @error('valid_until') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Fecha de validez" 
+                                <input type="number" name="price"
+                                    class="form-control @error('price') is-invalid @enderror" id="floatingInput"
+                                    placeholder="Precio..."  value="{{ old('price') }}">                                   
                                     
-                                    {{-- El user NO podra seleccionar la fecha actual ni anteriores --}}
-                                    {{-- Formato de fecha y hora válidos ("T" es para separar f de h)--}}
-                                    min="{{ \Carbon\carbon::tomorrow()->format('Y-m-d\Th:i:s') }}">  
-                                
-                                <label for="floatingInput">Fecha de Validez</label>
+                                <label for="floatingInput">Precio</label>
 
-                                {{-- Aqui mensaje de error para Validez --}}
-                                @error('valid_until')
+                                {{-- Aqui mensaje de error para Precio --}}
+                                @error('price')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            {{-- Color del producto --}}
+                            <div class="mb-3">
+                                <label for="floatingInput my-2">Colores</label>
+                                <select name="color_id[]" id="color_id" 
+                                class="form-control @error('color_id') is-invalid @enderror" multiple>
+                                    @foreach ($colors as $color)
+                                        <option @if (collect(old('color_id'))->contains($color->id)) selected @endif 
+                                            value="{{ $color->id }}">
+                                            {{ $color->name }}
+                                        </option>
+                                    @endforeach
+                                </select>                                
+
+                                {{-- Aqui mensaje de error para Color --}}
+                                @error('color_id')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            {{-- Tamaño del producto --}}
+                            <div class="mb-3">
+                                <label for="floatingInput my-2">Tamaños</label>
+                                <select name="size_id[]" id="size_id" 
+                                class="form-control @error('size_id') is-invalid @enderror" multiple>
+                                    @foreach ($sizes as $size)
+                                        <option @if (collect(old('size_id'))->contains($size->id)) selected @endif 
+                                            value="{{ $size->id }}">
+                                            {{ $size->name }}
+                                        </option>
+                                    @endforeach
+                                </select>                                
+
+                                {{-- Aqui mensaje de error para Tamaño --}}
+                                @error('size_id')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            {{-- Descripcion del producto --}}
+                            <div class="mb-3">
+                                <label for="desc" class="my-2 form-label">Descripcion</label>
+                                <textarea rows="10" 
+                                    class="form-control summernote" name="desc" placeholder="Descripcion..." 
+                                    placeholder="Precio..." @error('desc') is-invalid @enderror" id="floatingInput"> 
+                                    {{ old('desc') }}                                  
+                                </textarea>
+
+
+                                {{-- Aqui mensaje de error para Descripcion --}}
+                                @error('desc')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>
