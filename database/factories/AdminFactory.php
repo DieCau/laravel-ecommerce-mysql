@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class AdminFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Definir la estructura de los datos fakes para el modelo Admin
      *
      * @return array<string, mixed>
      */
