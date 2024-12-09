@@ -20,10 +20,12 @@
                             {{-- Nombre del producto --}}
                             <div class="form-floating mb-3">
                                 <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Producto..." value="{{ old('name') }}"> 
+                                    class="form-control @error('name') is-invalid @enderror" 
+                                    id="floatingInput" placeholder="Producto..." 
+                                    value="{{ old('name') }}"> 
                                 <label for="floatingInput">Producto</label>
 
+                                {{-- Aqui mensaje de error para Producto --}}
                                 @error('name')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -64,8 +66,9 @@
                             
                             {{-- Color del producto --}}
                             <div class="mb-3">
-                                <label for="floatingInput my-2">Colores</label>
+                                <label for="color_id" class="my-2 form-label">Selecciona los Colores</label>
                                 <select name="color_id[]" id="color_id" 
+                                {{-- "multiple" es para que se puedan seleccionar varios colores --}}
                                 class="form-control @error('color_id') is-invalid @enderror" multiple>
                                     @foreach ($colors as $color)
                                         <option @if (collect(old('color_id'))->contains($color->id)) selected @endif 
@@ -85,7 +88,7 @@
                             
                             {{-- Tamaño del producto --}}
                             <div class="mb-3">
-                                <label for="floatingInput my-2">Tamaños</label>
+                                <label for="size_id" class="my-2">Selecciona los Tamaños</label>
                                 <select name="size_id[]" id="size_id" 
                                 class="form-control @error('size_id') is-invalid @enderror" multiple>
                                     @foreach ($sizes as $size)
@@ -106,13 +109,14 @@
 
                             {{-- Descripcion del producto --}}
                             <div class="mb-3">
-                                <label for="desc" class="my-2 form-label">Descripcion</label>
+                                <label for="desc" class="my-2">Descripcion</label>
                                 <textarea rows="10" 
-                                    class="form-control summernote" name="desc" placeholder="Descripcion..." 
-                                    placeholder="Precio..." @error('desc') is-invalid @enderror" id="floatingInput"> 
-                                    {{ old('desc') }}                                  
+                                    {{-- "summernote" es para que se muestre el editor de texto en el formulario --}}
+                                    class="form-control summernote"  
+                                    @error('desc') is-invalid @enderror" name="desc"
+                                    id="floatingInput" placeholder="Descripcion..."> 
+                                    {{ old('desc') }}
                                 </textarea>
-
 
                                 {{-- Aqui mensaje de error para Descripcion --}}
                                 @error('desc')
@@ -127,9 +131,7 @@
                                     Crear Producto
                                 </button>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
