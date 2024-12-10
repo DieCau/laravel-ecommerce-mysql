@@ -67,12 +67,12 @@
                             
                             {{-- Color del producto --}}
                             <div class="mb-3">
-                                <label for="color_id" class="my-2 form-label">Selecciona los Colores</label>
+                                <label for="color_id" class="my-2">Selecciona los Colores</label>
                                 <select name="color_id[]" id="color_id" 
                                 {{-- "multiple" es para que se puedan seleccionar varios colores --}}
                                 class="form-control @error('color_id') is-invalid @enderror" multiple>
                                     @foreach ($colors as $color)
-                                        <option @if (collect(old('color_id'))->contains($color->id)) selected @endif 
+                                        <option @if(collect(old('color_id'))->contains($color->id)) selected @endif 
                                             value="{{ $color->id }}">
                                             {{ $color->name }}
                                         </option>
@@ -113,7 +113,7 @@
                                 <label for="desc" class="my-2">Descripcion</label>
                                 <textarea rows="10" 
                                     {{-- "summernote" es para funcione el editor de texto en el formulario --}}
-                                    class="text-white form-control summernote  
+                                    class="form-control summernote  
                                     @error('desc') is-invalid @enderror" name="desc"
                                     id="floatingInput" placeholder="Descripcion..."> 
                                     {{ old('desc') }}
@@ -127,19 +127,25 @@
                                 @enderror
                             </div>
 
-                            {{-- Imagen del producto --}}
+                            {{-- Miniatura del producto --}}
                             <div class="mb-3">
                                 <label for="thumbnail" class="my-2">Imagen Miniatura</label>
                                 <input type="file" class="form-control 
                                 @error('thumbnail') is-invalid @enderror" name="thumbnail" 
-                                id="floatingInput"
+                                id="thumbnail"
 
-                                {{-- Aqui mensaje de error para Imagen --}}
+                                {{-- Aqui mensaje de error para Miniatura --}}
                                 @error('thumbnail')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <img src="#" id="thumbnail_preview"
+                                class="img-fluid rounded mb-2 border border-muted d-none"
+                                width="100" height="100">
                             </div>
                             
                             {{-- Primera Imagen del producto --}}
@@ -147,7 +153,7 @@
                                 <label for="first_image" class="my-2">Primera Imagen</label>
                                 <input type="file" class="form-control 
                                 @error('first_image') is-invalid @enderror" name="first_image" 
-                                id="floatingInput"
+                                id="first_image"
 
                                 {{-- Aqui mensaje de error para Primera Imagen --}}
                                 @error('first_image')
@@ -156,13 +162,19 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            <div class="mt-2">
+                                <img src="#" id="first_image_preview"
+                                class="img-fluid rounded mb-2 border border-muted d-none"
+                                width="100" height="100">
+                            </div>
                            
                             {{-- Segunda Imagen del producto --}}
                             <div class="mb-3">
                                 <label for="second_image" class="my-2">Segunda Imagen</label>
                                 <input type="file" class="form-control 
                                 @error('second_image') is-invalid @enderror" name="second_image" 
-                                id="floatingInput"
+                                id="second_image"
 
                                 {{-- Aqui mensaje de error para Segunda Imagen --}}
                                 @error('second_image')
@@ -172,12 +184,18 @@
                                 @enderror
                             </div>
 
+                            <div class="mt-2">
+                                <img src="#" id="second_image_preview"
+                                class="img-fluid rounded mb-2 border border-muted d-none"
+                                width="100" height="100">
+                            </div>
+
                             {{-- Tercera Imagen del producto --}}
                             <div class="mb-3">
                                 <label for="third_image" class="my-2">Tercera Imagen</label>
                                 <input type="file" class="form-control 
                                 @error('third_image') is-invalid @enderror" name="third_image" 
-                                id="floatingInput"
+                                id="third_image"
 
                                 {{-- Aqui mensaje de error para Tercera Imagen --}}
                                 @error('third_image')
@@ -186,7 +204,12 @@
                                     </span>
                                 @enderror
                             </div>
-                            
+
+                            <div class="mt-2">
+                                <img src="#" id="third_image_preview"
+                                class="img-fluid rounded mb-2 border border-muted d-none"
+                                width="100" height="100">
+                            </div>                            
 
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
