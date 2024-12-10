@@ -56,7 +56,7 @@
                                     @endforeach                                    
                                 </td>
                                 <td>
-                                    @foreach ($products->sizes as $size)
+                                    @foreach ($product->sizes as $size)
                                         <span class="badge bg-ligth text-dark">
                                             {{ $size->name }}
                                         </span>                                        
