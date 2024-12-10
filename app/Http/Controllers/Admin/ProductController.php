@@ -76,7 +76,7 @@ class ProductController extends Controller
             // Una vez guardado, redirigir al user a la view products.index 
             return redirect()->route('admin.products.index')->with([
                 // Mensaje
-                'success' => 'El Producto se ha registrado correctamente!'
+                'success' => 'El Producto se ha creado correctamente!'
             ]);
         }
     }
@@ -99,7 +99,7 @@ class ProductController extends Controller
               'colors' => $colors,
               'sizes' => $sizes,
               // Agrego el producto a editar
-              'products' => $product,
+              'product' => $product,
           ]);       
     }
 
@@ -168,7 +168,7 @@ class ProductController extends Controller
         $this->removeProductImageFromStorage($product->second_image);
         $this->removeProductImageFromStorage($product->third_image);
 
-        // Ahroa si eliminar el producto 
+        // Ahora si eliminar el producto 
         $product->delete();
 
         return redirect()->route('admin.products.index')->with([

@@ -38,7 +38,7 @@
                             <th scope="col">Precio</th>
                             <th scope="col">Imagenes</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -49,7 +49,7 @@
                                 <th scope="row">{{ $key += 1 }}</th>
                                 <td>{{ $product->name }}</td>
                                 <td>
-                                    @foreach ($products->colors as $color)
+                                    @foreach ($product->colors as $color)
                                         <span class="badge bg-ligth text-dark">
                                             {{ $color->name }}
                                         </span>                                        
@@ -68,12 +68,21 @@
                                     <div class="d-flex flex-column">
                                         <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->name }}" 
                                             class="img-fluid rounded mb-1 border border-muted" width="30" height="30">
-                                        <img src="{{ asset($product->first_image) }}" alt="{{ $product->name }}" 
+
+                                        @if($product->first_image)                                            
+                                            <img src="{{ asset($product->first_image) }}" alt="{{ $product->name }}" 
                                             class="img-fluid rounded mb-1" width="30" height="30">
-                                        <img src="{{ asset($product->second_image) }}" alt="{{ $product->name }}" 
+                                        @endif
+
+                                        @if($product->second_image)                                            
+                                            <img src="{{ asset($product->second_image) }}" alt="{{ $product->name }}" 
                                             class="img-fluid rounded mb-1" width="30" height="30">
-                                        <img src="{{ asset($product->third_image) }}" alt="{{ $product->name }}" 
+                                        @endif
+
+                                        @if($product->third_image)                                            
+                                            <img src="{{ asset($product->third_image) }}" alt="{{ $product->name }}" 
                                             class="img-fluid rounded mb-1" width="30" height="30">
+                                        @endif
                                     </div>
                                 </td>
 
