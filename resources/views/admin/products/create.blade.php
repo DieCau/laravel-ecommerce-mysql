@@ -1,5 +1,4 @@
 @extends('admin.layouts.app')
-
 {{-- Crear una seccion para mostrar el tablero del dashboard --}}
 @section('content')
     <div class="row">
@@ -31,12 +30,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>                                    
                                 @enderror
+                            </div>
                            
                             {{-- Cantidad del producto --}}
                             <div class="form-floating mb-3">
                                 <input type="number" name="quantity"
-                                    class="form-control @error('quantity') is-invalid @enderror" id="floatingInput"
-                                    placeholder="Cantidad"  value="{{ old('quantity') }}">                                   
+                                    class="form-control @error('quantity') is-invalid @enderror" 
+                                    id="floatingInput" placeholder="Cantidad..."  
+                                    value="{{ old('quantity') }}">                                   
                                     
                                 <label for="floatingInput">Cantidad</label>
 
@@ -111,8 +112,8 @@
                             <div class="mb-3">
                                 <label for="desc" class="my-2">Descripcion</label>
                                 <textarea rows="10" 
-                                    {{-- "summernote" es para que se muestre el editor de texto en el formulario --}}
-                                    class="form-control summernote"  
+                                    {{-- "summernote" es para funcione el editor de texto en el formulario --}}
+                                    class="text-white form-control summernote  
                                     @error('desc') is-invalid @enderror" name="desc"
                                     id="floatingInput" placeholder="Descripcion..."> 
                                     {{ old('desc') }}
@@ -125,6 +126,67 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            {{-- Imagen del producto --}}
+                            <div class="mb-3">
+                                <label for="thumbnail" class="my-2">Imagen Miniatura</label>
+                                <input type="file" class="form-control 
+                                @error('thumbnail') is-invalid @enderror" name="thumbnail" 
+                                id="floatingInput"
+
+                                {{-- Aqui mensaje de error para Imagen --}}
+                                @error('thumbnail')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            {{-- Primera Imagen del producto --}}
+                            <div class="mb-3">
+                                <label for="first_image" class="my-2">Primera Imagen</label>
+                                <input type="file" class="form-control 
+                                @error('first_image') is-invalid @enderror" name="first_image" 
+                                id="floatingInput"
+
+                                {{-- Aqui mensaje de error para Primera Imagen --}}
+                                @error('first_image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                           
+                            {{-- Segunda Imagen del producto --}}
+                            <div class="mb-3">
+                                <label for="second_image" class="my-2">Segunda Imagen</label>
+                                <input type="file" class="form-control 
+                                @error('second_image') is-invalid @enderror" name="second_image" 
+                                id="floatingInput"
+
+                                {{-- Aqui mensaje de error para Segunda Imagen --}}
+                                @error('second_image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            {{-- Tercera Imagen del producto --}}
+                            <div class="mb-3">
+                                <label for="third_image" class="my-2">Tercera Imagen</label>
+                                <input type="file" class="form-control 
+                                @error('third_image') is-invalid @enderror" name="third_image" 
+                                id="floatingInput"
+
+                                {{-- Aqui mensaje de error para Tercera Imagen --}}
+                                @error('third_image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
 
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
