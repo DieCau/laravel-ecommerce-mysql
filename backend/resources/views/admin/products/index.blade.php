@@ -50,14 +50,14 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                     @foreach ($product->colors as $color)
-                                        <span class="badge bg-ligth text-dark">
+                                        <span class="badge bg-ligth">
                                             {{ $color->name }}
                                         </span>                                        
                                     @endforeach                                    
                                 </td>
                                 <td>
                                     @foreach ($product->sizes as $size)
-                                        <span class="badge bg-ligth text-dark">
+                                        <span class="badge bg-ligth">
                                             {{ $size->name }}
                                         </span>                                        
                                     @endforeach                                    
@@ -89,11 +89,11 @@
                                 <td>
                                     {{-- verificar si tiene stock el producto --}}
                                     @if ($product->status)
-                                        <span class="bagde bg-success p-2">
+                                        <span class="bagde bg-success p-2 rounded">
                                             En stock
                                         </span> 
                                     @else
-                                        <span class="bagde bg-danger p-2">
+                                        <span class="bagde bg-danger p-2 rounded">
                                             Sin stock
                                         </span> 
                                     @endif

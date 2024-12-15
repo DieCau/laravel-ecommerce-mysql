@@ -222,6 +222,22 @@
                             </div> 
 
                             <div class="mb-2">
+                                <label for="status" class="my-2">Estado del Producto</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="1" @checked($product->status)>
+                                    <label class="form-check-label" for="status">
+                                      Con Stock
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="0" @checked(!$product->status)>
+                                    <label class="form-check-label" for="status">
+                                      Sin Stock
+                                    </label>
+                                  </div>
+                            </div>
+
+                            <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">
                                     Guardar Cambios
                                 </button>

@@ -143,6 +143,8 @@ class ProductController extends Controller
             // Generar un slug (version amigable para web) a partir del producto
             $data['slug'] = Str::slug($request->name);
 
+            // Actualizar el status
+            $data['status'] = $request->status;
 
             // El producto es ingresado en la DB a traves de la var $data e informacion almacenada en $product
             $product->update($data);

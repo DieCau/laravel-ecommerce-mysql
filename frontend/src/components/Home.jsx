@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { axiosRequest } from './helpers/config'
 import ProductsList from './products/ProductsList'
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/products')
+        const response = await axiosRequest.get('products')
         setProducts(response.data.data)        
         setColors(response.data.colors)        
         setSizes(response.data.sizes)        
@@ -24,6 +24,6 @@ export default function Home() {
   },[])
   
   return (
-    <ProductsList products={products} colors={colors} sizes={sizes} />
+    <ProductsList products={products} />
   )
 }
