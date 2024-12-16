@@ -15,7 +15,7 @@ Route::get('products/{color}/color', [ProductController::class, 'filterProductsB
 // Filtrar los Productos por Tamaño
 Route::get('products/{size}/size', [ProductController::class, 'filterProductsBySize']);
 
-Route::get('products/{searchTerm}/find', [ProductController::class, 'searchProductsByTerm']);
+Route::get('products/{searchTerm}/find', [ProductController::class, 'filterProductsByTerm']);
 
 Route::get('products/{product}/show', [ProductController::class, 'show']);
 

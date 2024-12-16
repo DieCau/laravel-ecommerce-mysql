@@ -42,9 +42,9 @@ class ProductController extends Controller
             ]);
     }
    
-    public function searchProductsByTerm($searchTerm) {
+    public function filterProductsByTerm($searchTerm) {
         return ProductResource::collection(
-            Product::where('name', 'like', '%', $searchTerm.'%')
+            Product::where('name', 'LIKE', '%'.$searchTerm.'%')
             ->with(['colors', 'sizes', 'reviews'])->latest()->get())
             ->additional([
                 'colors' => Color::has('products')->get(),

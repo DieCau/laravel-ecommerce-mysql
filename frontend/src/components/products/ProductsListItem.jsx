@@ -12,7 +12,7 @@ export default function ProductsListItem({ product }) {
               <h5 className='fw-bold'>{ product.name }</h5>
               <h6 className='badge bg-success p-2'>${ product.price }</h6>
             </div>
-            <div className='d-flex justify-content-between align-items-center'>
+            <div className='d-flex justify-content-between'>
               {/* Sizes */}
               <div className='d-flex justify-content-between align-items-center mt-2'>
                 {

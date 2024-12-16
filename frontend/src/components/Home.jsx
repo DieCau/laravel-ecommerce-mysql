@@ -34,17 +34,42 @@ export default function Home() {
 
   useEffect(() => {
     const fetchAllProducts = async () => {
+      setMessage('')
       try {
-        const response = await axiosRequest.get('products')
-        setProducts(response.data.data)        
-        setColors(response.data.colors)        
-        setSizes(response.data.sizes)        
+        // verificar si hay un color seleccionado
+        if (selectColor) {          
+          const response = await axiosRequest.get(`products/${selectColor}/color`)
+          setProducts(response.data.data)        
+          setColors(response.data.colors)        
+          setSizes(response.data.sizes)        
+        } else if (selectSize) {
+          const response = await axiosRequest.get(`products/${selectSize}/size`)
+          setProducts(response.data.data)        
+          setColors(response.data.colors)        
+          setSizes(response.data.sizes)
+        } else if (searchTerm) {
+          const response = await axiosRequest.get(`products/${searchTerm}/find`)
+          if (response.data.data.length === 0) {
+            setMessage('Lo sentimos. No se encontraron productos que coincidan con tu Busqueda.')
+          } else {
+            setProducts(response.data.data)        
+            setColors(response.data.colors)        
+            setSizes(response.data.sizes)
+          }
+        }
+        else {
+          const response = await axiosRequest.get('products')
+          setProducts(response.data.data)        
+          setColors(response.data.colors)        
+          setSizes(response.data.sizes)        
+        }
       } catch (error) {
         console.log(error)
       }
     }
     fetchAllProducts()  
-  },[])
+    // useEffect se ejecuta solo cuando uno de los valores cambie
+  },[selectColor, selectSize, searchTerm])  
   
   return (
     <div className='row my-5'>
@@ -52,32 +77,85 @@ export default function Home() {
         <div className='row'>
           <div className='col-md-8 mx-auto'>
             <div className='row'>
+
               <div className='col-md-4 mb-2'>
                 <div className='mb-2'>
                   <span className='fw-bold'>
-                  Filtrar por color:
+                    Filtrar por color:
                   </span>
+                </div>
                   <select name="color_id" id="color_id" defaultValue='' 
                     onChange={ (e) => handleColorSelectBox(e) } 
                     disabled={ selectSize || searchTerm }
-                    className="form-select">
+                    className="form-select"
+                  >
                     <option value='' disabled={ !selectColor } 
                       onChange={ () => clearFilters }
                       >
-                      Todos los colores
+                        Todos los colores
                     </option>
                     {
                       colors?.map((color) => (
                         <option key={ color.id } value={ color.id }>{ color.name }</option>
                       ))
                     }
-                  </select>
+                  </select>                  
+              </div>
+
+              <div className='col-md-4 mb-2'>
+                <div className='mb-2'>
+                  <span className='fw-bold'>
+                    Filtrar por tamaño:
+                  </span>
                 </div>
+                  <select name="size_id" id="size_id" defaultValue='' 
+                    onChange={ (e) => handleSizeSelectBox(e) } 
+                    disabled={ selectColor || searchTerm }
+                    className="form-select"
+                  >
+                    <option value='' disabled={ !selectSize } 
+                      onChange={ () => clearFilters }
+                      >
+                        Todos los Tamaños
+                    </option>
+                    {
+                      sizes?.map((size) => (
+                        <option key={ size.id } value={ size.id }>{ size.name }</option>
+                      ))
+                    }
+                  </select>                
+              </div>
+
+              <div className='col-md-4 mb-2'>
+                <div className='mb-2'>
+                  <span className='fw-bold'>
+                    Buscar Producto:
+                  </span>
+                </div>
+                <form className='d-flex'>
+                  <input type="search" className='form-control me-2'
+                    value={ searchTerm }  
+                    disabled={ selectColor || selectSize }
+                    onChange={ (e) => setSearchTerm(e.target.value) }
+                    placeholder='Buscar...'
+                  />                  
+                </form>
               </div>
             </div>
           </div>
         </div>
-      <ProductsList products={products} />
+        {
+          message ?
+          <div className='row'>
+            <div className='col-md-12'>
+              <div className='alert alert-warning text-center'>
+                { message }
+              </div>
+            </div>
+          </div>
+          :
+          <ProductsList products={products} />
+        }
     </div>
   </div>
 )}
