@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDebounce } from 'use-debounce'
 import { axiosRequest } from './helpers/config'
+import Alert from './layouts/Alert'
 import ProductsList from './products/ProductsList'
 
 export default function Home() {
@@ -13,6 +15,7 @@ export default function Home() {
   const [selectSize, setSelectSize] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [message, setMessage] = useState('')
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500)
 
   const handleColorSelectBox = (e) => {
     setSelectSize('')
@@ -47,7 +50,7 @@ export default function Home() {
           setProducts(response.data.data)        
           setColors(response.data.colors)        
           setSizes(response.data.sizes)
-        } else if (searchTerm) {
+        } else if (debouncedSearchTerm[0]) {
           const response = await axiosRequest.get(`products/${searchTerm}/find`)
           if (response.data.data.length === 0) {
             setMessage('Lo sentimos. No se encontraron productos que coincidan con tu Busqueda.')
@@ -69,7 +72,7 @@ export default function Home() {
     }
     fetchAllProducts()  
     // useEffect se ejecuta solo cuando uno de los valores cambie
-  },[selectColor, selectSize, searchTerm])  
+  },[selectColor, selectSize, debouncedSearchTerm[0]])  
   
   return (
     <div className='row my-5'>
@@ -146,13 +149,7 @@ export default function Home() {
         </div>
         {
           message ?
-          <div className='row'>
-            <div className='col-md-12'>
-              <div className='alert alert-warning text-center'>
-                { message }
-              </div>
-            </div>
-          </div>
+          <Alert type='primary' content={ message } />
           :
           <ProductsList products={products} />
         }
