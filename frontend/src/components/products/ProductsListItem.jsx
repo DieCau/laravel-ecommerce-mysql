@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { colorTranslations } from '../helpers/colorTranslations'
 
 export default function ProductsListItem({ product }) {
   return (
@@ -12,6 +13,7 @@ export default function ProductsListItem({ product }) {
               <h6 className='badge bg-success p-2'>${ product.price }</h6>
             </div>
             <div className='d-flex justify-content-between align-items-center'>
+              {/* Sizes */}
               <div className='d-flex justify-content-between align-items-center mt-2'>
                 {
                   product.sizes?.map((size) => (
@@ -21,6 +23,7 @@ export default function ProductsListItem({ product }) {
                   ))
                 }
               </div>
+              {/* Status */}
               <div>
                 {
                   product.status == 1 ? 
@@ -29,6 +32,22 @@ export default function ProductsListItem({ product }) {
                     <span className='badge bg-danger p-2'>Sin stock</span>
                 }
               </div>
+            </div>
+
+            {/* Colors */}
+            <div className='d-flex justify-content-start align-items-center mt-2'>
+              {
+                product.colors?.map((color) => (
+                  <div key={ color.id } className='me-1 border border-dark-subtle border-1'  
+                    style={{ 
+                      backgroundColor: colorTranslations[color.name.toLowerCase()] || 'transparent', 
+                      width: '20px', 
+                      height: '20px', 
+                      borderRadius: '50%' 
+                    }}>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
