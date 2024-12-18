@@ -19,6 +19,9 @@ class ProductController extends Controller
     }
     
     public function show(Product $product) {
+        if (!$product) {
+            abort(404);
+        }
         return ProductResource::make(
             $product->load(['colors', 'sizes', 'reviews'])
         );
