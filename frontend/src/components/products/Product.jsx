@@ -9,11 +9,11 @@ import Sliders from './images/Sliders'
 
 export default function Product() {
   const [product, setProduct] = useState([])
-  const [colors, setColors] = useState([])
-  const [sizes, setSizes] = useState([])
   const [loading, setLoading] = useState(false)
-  const [quantity, setQuantity] = useState(1)
+  const [selectColor, setSelectColor] = useState('')
+  const [selectSize, setSelectSize] = useState('')
   const [error, setError] = useState('')
+  const [quantity, setQuantity] = useState(1)
 
   const { slug } = useParams()
 
@@ -23,8 +23,8 @@ export default function Product() {
       try {
         const response = await axiosRequest.get(`products/${slug}/show`)
         setProduct(response.data.data)
-        setColors(response.data.colors)
-        setSizes(response.data.sizes)
+        selectColor(response.data.colors)
+        setSelectSize(response.data.sizes)
         setLoading(false)
       } catch (error) {
         if (error?.response?.status === 404) {
@@ -36,6 +36,22 @@ export default function Product() {
     }
     fetchProductBySlug()
   }, [slug])
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
+    }
+  }
+  const incrementQuantity = () => {
+    if (quantity < product?.quantity) {
+      setQuantity(quantity + 1)
+    }
+  }
+
+  const handleInputChange = (e) => {
+    const value = Math.max(1, Math.min(Number(e.target.value), product?.quantity || 1))
+    setQuantity(value)
+  }
 
   return (
     <div className='card my-5'>
@@ -57,12 +73,15 @@ export default function Product() {
                 <h6 className='badge bg-success p-2'>${product?.price}</h6>
               </div>
             </div>
-            {/* Sizes */}
+            {/* Tamaños */}
             <div className='d-flex justify-content-between'>
               <div className='d-flex justify-content-start align-items-center mb-3'>
                 {
                   product.sizes?.map((size) => (
-                    <span key={size.id} className='bg-dark-subtle text-dark me-2 pe-1 ps-1 fw-bold'>
+                    <span key={size.id} 
+                          onClick={() => setSelectSize(size)}
+                          style={{cursor: 'pointer'}}
+                          className='bg-dark-subtle text-dark me-2 pe-1 ps-1 fw-bold'>
                       <small>{size.name}</small>
                     </span>
                   ))
@@ -82,12 +101,19 @@ export default function Product() {
             <div className='d-flex justify-content-start align-items-center mt-2'>
               {
                 product.colors?.map((color) => (
-                  <div key={color.id} className='me-1 border border-dark-subtle border-1'
+                  <div key={color.id}
+                    onClick={() => setSelectColor(color)} 
+                    className={`me-1 border border-dark-subtle border-1
+                      ${setSelectColor?.id === color.id 
+                        ? 'border border-dark-subtle border-2 bi bi-x-lg text-light d-flex justify-content-center align-items-center' 
+                        : ''}
+                      `}
                     style={{
                       backgroundColor: colorTranslations[color.name.toLowerCase()] || 'transparent',
                       width: '20px',
                       height: '20px',
-                      borderRadius: '50%'
+                      borderRadius: '50%',
+                      cursor: 'pointer'
                     }}>
                   </div>
                 ))
@@ -97,6 +123,36 @@ export default function Product() {
               {
                 Parser().parse(product?.desc)                
               }
+            </div>
+            <div className='row mt-5'>
+              <div className='d-flex justify-content-center'>
+                <div className='input-group mb-5' style={{ width: '150px' }}>
+                  <button className='btn btn-outline-secondary' 
+                    type='button'
+                    onClick={decrementQuantity}
+                    disabled={quantity <= 1}
+                  > - </button>
+                  <input type='number' className='form-control' 
+                    placeholder='Cantidad'
+                    value={quantity}
+                    onChange={handleInputChange}
+                    min={1}
+                    max={product?.quantity > 1 ? product?.quantity : 1}
+                  />
+                  <button className='btn btn-outline-secondary' 
+                    type='button'
+                    onClick={incrementQuantity}
+                    disabled={quantity >= product?.quantity}
+                  > + </button>
+                </div>
+              </div>
+            </div>
+            <div className='d-flex justify-content-center'>
+              <button className='btn btn-dark' 
+              disabled={ !selectColor || !selectSize || product?.quantity == 0 } 
+              >
+                <i className='bi bi-cart-fill'></i>{" "} Agregar al Carrito
+              </button>
             </div>
           </div>
         </div>
