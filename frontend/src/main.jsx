@@ -11,13 +11,14 @@ import './index.css'
 
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import { store } from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './redux/store'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <PersistGate persitor={persistor}>
+    <PersistGate persistor={persistor}>
       <div className='container card shadow-sm my-4'>
-        <ToastContainer position='right' />
+        <ToastContainer position='top-right' />
         <App />
       </div>,
     </PersistGate>

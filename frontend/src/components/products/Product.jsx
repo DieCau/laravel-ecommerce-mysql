@@ -1,21 +1,24 @@
 import { Parser } from 'html-to-react'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { colorTranslations } from '../helpers/colorTranslations'
 import { axiosRequest } from '../helpers/config'
 import Alert from '../layouts/Alert'
 import Spinner from '../layouts/Spinner'
+
+import { addToCart } from '../../redux/slices/cartSlice'
 import Sliders from './images/Sliders'
 
 export default function Product() {
   const [product, setProduct] = useState([])
   const [loading, setLoading] = useState(false)
-  const [selectColor, setSelectColor] = useState('')
-  const [selectSize, setSelectSize] = useState('')
-  const [error, setError] = useState('')
+  const [selectColor, setSelectColor] = useState(null)
+  const [selectSize, setSelectSize] = useState(null)
   const [quantity, setQuantity] = useState(1)
-
+  const [error, setError] = useState('')
   const { slug } = useParams()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchProductBySlug = async () => {
@@ -154,6 +157,22 @@ export default function Product() {
             <div className='d-flex justify-content-center'>
               <button className='btn btn-dark' 
               disabled={ !selectColor || !selectSize || product?.quantity == 0 } 
+                onClick={() => {
+                  dispatch(addToCart({
+                    product_id: product.id,
+                    slug: product.slug,
+                    quantity: parseInt(product.quantity),
+                    price: parseInt(product.price),
+                    color: selectColor.name,
+                    size: selectSize.name,
+                    max_quantity: parseInt(product.quantity),
+                    image: product.thumbnail,
+                    coupon_id: null
+                  }))
+                  setSelectColor(null)
+                  setSelectSize(null)
+                  setQuantity(1)
+                }}
               >
                 <i className='bi bi-cart-fill'></i>{" "} Agregar al Carrito
               </button>
