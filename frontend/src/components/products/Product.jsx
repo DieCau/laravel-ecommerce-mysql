@@ -81,7 +81,11 @@ export default function Product() {
                     <span key={size.id} 
                           onClick={() => setSelectSize(size)}
                           style={{cursor: 'pointer'}}
-                          className='bg-dark-subtle text-dark me-2 pe-1 ps-1 fw-bold'>
+                          className={`border border-2 bg-dark-subtle text-dark me-2 pe-1 ps-1 fw-medium
+                            ${selectSize?.id === size.id 
+                              ? 'border border-2 border-dark-subtle fw-bold text-decoration-underline' 
+                              : '' }
+                          `}>
                       <small>{size.name}</small>
                     </span>
                   ))
@@ -104,7 +108,7 @@ export default function Product() {
                   <div key={color.id}
                     onClick={() => setSelectColor(color)} 
                     className={`me-1 border border-dark-subtle border-1
-                      ${setSelectColor?.id === color.id 
+                      ${selectColor?.id === color.id 
                         ? 'border border-dark-subtle border-2 bi bi-x-lg text-light d-flex justify-content-center align-items-center' 
                         : ''}
                       `}
