@@ -1,3 +1,4 @@
+// Traducciones de colores en español a inglés
 export const colorTranslations = {
     rojo: 'red',
     verde: 'green',
